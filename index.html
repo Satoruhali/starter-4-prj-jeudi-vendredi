@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projet — Landing page</title>
+
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="#">
+          <!-- Bug intentionnel #2 : src cassé (chemin/nom) -->
+          <img class="brand__logo" src="./assets/logo.svg" alt="Logo du projet" 
+          width="32"
+           height="32" />
+          <span class="brand__name">NomDuProjet</span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navigation principale">
+          <a class="site-nav__link" href="#probleme">Problème</a>
+          <a class="site-nav__link" href="#cible">Cible</a>
+          <a class="site-nav__link" href="#mvp">MVP</a>
+          <a class="site-nav__link" href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero__inner">
+          <div class="hero__content">
+            <p class="kicker">One-liner (10s)</p>
+
+            <!-- Bug intentionnel #3 : classe HTML typo → une règle CSS ne s’applique pas -->
+            <h1 class="hero__title">J’aide [cible] à [objectif] sans [friction].</h1>
+
+
+            <p class="hero__subtitle">
+              Pitch 30s : 4–6 phrases. Une situation réelle, pas de jargon.
+            </p>
+
+            <div class="hero__actions">
+              <a class="btn" href="#contact">Me contacter</a>
+              <a class="btn btn--ghost" href="#mvp">Voir le MVP</a>
+            </div>
+          </div>
+
+          <div class="hero__visual" aria-hidden="true">
+            <img
+              class="hero__image"
+              src="./assets/hero.svg"
+              alt=""
+              width="420"
+              height="260"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="probleme">
+        <div class="container">
+          <h2 class="section__title">Le problème</h2>
+          <ul class="bullets">
+            <li>[Situation] Quand …, les gens …</li>
+            <li>[Douleur] Ça coûte … (temps / stress / argent)</li>
+            <li>[Alternative] Aujourd’hui ils font …</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section section--alt" id="cible">
+        <div class="container">
+          <h2 class="section__title">Pour qui ?</h2>
+          <div class="cards">
+            <article class="card">
+              <h3 class="card__title">Segment principal</h3>
+              <p class="card__text">
+                Décris ta cible concrètement (métier, contexte, contraintes).
+              </p>
+            </article>
+
+            <article class="card">
+              <h3 class="card__title">Pourquoi eux ?</h3>
+              <p class="card__text">
+                Explique pourquoi ce segment souffre le plus et pourquoi c’est prioritaire.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="mvp">
+        <div class="container">
+          <h2 class="section__title">MVP (3–6 items)</h2>
+          <div class="cards">
+            <article class="card">
+              <h3 class="card__title">Feature 1</h3>
+              <p class="card__text">Une promesse concrète, testable.</p>
+            </article>
+            <article class="card">
+              <h3 class="card__title">Feature 2</h3>
+              <p class="card__text">Pas de jargon, une situation réelle.</p>
+            </article>
+            <article class="card">
+              <h3 class="card__title">Feature 3</h3>
+              <p class="card__text">Ce que tu fais en premier.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--alt" id="contact">
+        <div class="container">
+          <h2 class="section__title">Contact</h2>
+          <p class="section__lead">
+            Call-to-action : comment on te contacte, ou un lien (même fictif).
+          </p>
+
+          <div class="contact">
+            <!-- Bug intentionnel #4 : typo dans la classe → style “primary” manquant -->
+             <a class="btn btn--primary" href="mailto:ton.email@example.com">Envoyer un email</a>
+            <a class="btn btn--ghost" href="#">Lien / réseau</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__text">
+          © <span id="year">2026</span> — NomDuProjet. Fait en Semaine 2.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+

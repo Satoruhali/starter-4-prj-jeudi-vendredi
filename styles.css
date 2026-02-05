@@ -1,0 +1,246 @@
+:root {
+  --bg: #0b1020;
+  --panel: #111a33;
+  --text: #e9ecf6;
+  --muted: #b8c0e6;
+  --brand: #7c5cff;
+  --brand-2: #27d6c3;
+  --border: rgba(255, 255, 255, 0.12);
+  --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(1200px 800px at 20% 0%, rgba(124, 92, 255, 0.35), transparent 60%),
+    radial-gradient(1000px 700px at 80% 20%, rgba(39, 214, 195, 0.18), transparent 55%),
+    var(--bg);
+  color: var(--text);
+
+  /* Bug intentionnel #5 : faute de frappe sur font-weight (à diagnostiquer via Styles) */
+  font-weight: 400;
+
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.container {
+  width: min(980px, 92%);
+  margin: 0 auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  background: rgba(11, 16, 32, 0.7);
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
+}
+
+.site-header__inner {
+  /* Bug intentionnel #6 : justify-content n'aura pas d'effet sans display:flex */
+   display:flex ; 
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 650;
+}
+
+.brand__logo {
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.site-nav {
+  display: inline-flex;
+  gap: 14px;
+}
+
+.site-nav__link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.site-nav__link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+}
+
+.hero {
+  padding: 48px 0 30px;
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: 26px;
+  align-items: center;
+}
+
+.kicker {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero__title {
+  margin: 0 0 12px;
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1.1;
+}
+
+.hero__subtitle {
+  margin: 0 0 18px;
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hero__visual {
+  background: linear-gradient(145deg, rgba(124, 92, 255, 0.22), rgba(39, 214, 195, 0.1));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.hero__image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.section {
+  padding: 26px 0;
+}
+
+.section--alt {
+  background: rgba(255, 255, 255, 0.03);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.section__title {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+
+.section__lead {
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+
+.bullets {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.card__title {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.card__text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.contact {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn--ghost {
+  background: transparent;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, rgba(124, 92, 255, 0.9), rgba(39, 214, 195, 0.55));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.site-footer {
+  padding: 26px 0 38px;
+}
+
+.site-footer__inner {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+.site-footer__text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width: 860px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
