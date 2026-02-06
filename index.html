@@ -12,20 +12,19 @@
   <body>
     <header class="site-header">
       <div class="container site-header__inner">
-        <a class="brand" href="#">
-          <!-- Bug intentionnel #2 : src cassé (chemin/nom) -->
-          <img class="brand__logo" src="./assets/logo.svg" alt="Logo du projet" 
-          width="32"
-           height="32" />
-          <span class="brand__name">NomDuProjet</span>
-        </a>
+       <a class="brand" href="#">
+      <img class="brand__logo" src="./assets/logo-comparemanga.svg" alt="Logo du projet" 
+      width="60" height="60" />
+        <span class="brand__name">CompareManga</span>
+    </a>
 
-        <nav class="site-nav" aria-label="Navigation principale">
-          <a class="site-nav__link" href="#probleme">Problème</a>
-          <a class="site-nav__link" href="#cible">Cible</a>
-          <a class="site-nav__link" href="#mvp">MVP</a>
-          <a class="site-nav__link" href="#contact">Contact</a>
-        </nav>
+      <!-- PAR ces lignes -->
+      <nav class="site-nav" aria-label="Navigation principale">
+        <a class="site-nav__link active" href="#accueil">Accueil</a>
+        <a class="site-nav__link" href="#comparer">Comparer</a>
+        <a class="site-nav__link" href="#boutiques">Boutiques</a>
+      </nav>
+
       </div>
     </header>
 
@@ -33,41 +32,53 @@
       <section class="hero">
         <div class="container hero__inner">
           <div class="hero__content">
-            <p class="kicker">One-liner (10s)</p>
+            <p class="kicker">Comparer avant d’acheter</p>
 
-            <!-- Bug intentionnel #3 : classe HTML typo → une règle CSS ne s’applique pas -->
-            <h1 class="hero__title">J’aide [cible] à [objectif] sans [friction].</h1>
-
-
+            <!-- PAR ces lignes -->
+            <h1 class="hero__title">Comparer les prix des mangas et figurines en France</h1>
             <p class="hero__subtitle">
-              Pitch 30s : 4–6 phrases. Une situation réelle, pas de jargon.
+              Trouvez les meilleures offres auprès de boutiques fiables
             </p>
+
+            <!-- AJOUTER ces lignes après la balise .hero__subtitle -->
+            <div class="search-bar">
+              <input 
+                type="text" 
+                class="search-bar__input" 
+                placeholder="chercher un manga ou une figurine"
+                aria-label="Rechercher un manga ou une figurine"
+              />
+              <button class="search-bar__btn btn">
+                Chercher
+              </button>
+            </div>
+
 
             <div class="hero__actions">
               <a class="btn" href="#contact">Me contacter</a>
-              <a class="btn btn--ghost" href="#mvp">Voir le MVP</a>
+             
             </div>
           </div>
 
           <div class="hero__visual" aria-hidden="true">
-            <img
-              class="hero__image"
-              src="./assets/hero.svg"
-              alt=""
-              width="420"
-              height="260"
-            />
-          </div>
-        </div>
+         <video class="hero__video" autoplay muted loop playsinline>
+          <source src="./assets/yuta-from-jujutsu-kaisen.3840x2160.mp4" type="video/mp4">
+          
+        </video>
+        <div class="hero__video-overlay"></div>
+      </div>
+              
+
+      </div>
       </section>
 
       <section class="section" id="probleme">
         <div class="container">
           <h2 class="section__title">Le problème</h2>
           <ul class="bullets">
-            <li>[Situation] Quand …, les gens …</li>
-            <li>[Douleur] Ça coûte … (temps / stress / argent)</li>
-            <li>[Alternative] Aujourd’hui ils font …</li>
+            <li>>Comparer les prix de mangas demande de visiter plusieurs sites manuellement</li>
+             <li>Les ruptures de stock ne sont pas visibles en un coup d’œil</li>
+            <li>On achète souvent plus cher par manque d’information</li>
           </ul>
         </div>
       </section>
@@ -77,16 +88,18 @@
           <h2 class="section__title">Pour qui ?</h2>
           <div class="cards">
             <article class="card">
-              <h3 class="card__title">Segment principal</h3>
+              <h3 class="card__title"> Lecteurs de manga réguliers</h3>
               <p class="card__text">
-                Décris ta cible concrètement (métier, contexte, contraintes).
+                 Étudiants ou jeunes actifs qui achètent plusieurs tomes par mois
+                et veulent maîtriser leur budget.
               </p>
             </article>
 
             <article class="card">
-              <h3 class="card__title">Pourquoi eux ?</h3>
+              <h3 class="card__title"> Collectionneurs </h3>
               <p class="card__text">
-                Explique pourquoi ce segment souffre le plus et pourquoi c’est prioritaire.
+                Lecteurs attentifs aux éditions, à la disponibilité et aux bonnes affaires,
+                 notamment lors de sorties ou rééditions.  
               </p>
             </article>
           </div>
@@ -95,19 +108,19 @@
 
       <section class="section" id="mvp">
         <div class="container">
-          <h2 class="section__title">MVP (3–6 items)</h2>
+          <h2 class="section__title">Fonctionnalités </h2>
           <div class="cards">
             <article class="card">
-              <h3 class="card__title">Feature 1</h3>
-              <p class="card__text">Une promesse concrète, testable.</p>
+              <h3 class="card__title"> Comparaison de prix</h3>
+              <p class="card__text"> Affichage des prix d’un même tome chez plusieurs vendeurs.</p>
             </article>
             <article class="card">
-              <h3 class="card__title">Feature 2</h3>
-              <p class="card__text">Pas de jargon, une situation réelle.</p>
+              <h3 class="card__title"> Disponibilité en temps réel</h3>
+              <p class="card__text"> Indication claire : en stock, en rupture ou en précommande.</p>
             </article>
             <article class="card">
-              <h3 class="card__title">Feature 3</h3>
-              <p class="card__text">Ce que tu fais en premier.</p>
+              <h3 class="card__title">Recherche par série</h3>
+              <p class="card__text"> Trouver rapidement tous les tomes d’un manga depuis une seule page.</p>
             </article>
           </div>
         </div>
@@ -117,7 +130,7 @@
         <div class="container">
           <h2 class="section__title">Contact</h2>
           <p class="section__lead">
-            Call-to-action : comment on te contacte, ou un lien (même fictif).
+              Une idée, une question ou envie de suivre le projet ?
           </p>
 
           <div class="contact">
@@ -132,7 +145,7 @@
     <footer class="site-footer">
       <div class="container site-footer__inner">
         <p class="site-footer__text">
-          © <span id="year">2026</span> — NomDuProjet. Fait en Semaine 2.
+          © <span id="year">2026</span> — CompareManga 
         </p>
       </div>
     </footer>
