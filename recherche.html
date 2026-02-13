@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projet — Landing page</title>
+
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+       <a class="brand" href="#">
+      <img class="brand__logo" src="./assets/logo-comparemanga.svg" alt="Logo du projet" 
+      width="60" height="60" />
+        <span class="brand__name">CompareManga</span>
+    </a>
+
+      <!-- PAR ces lignes -->
+      <nav class="site-nav" aria-label="Navigation principale">
+        <a class="site-nav__link active" href="#accueil">Accueil</a>
+        <a class="site-nav__link" href="#comparer">Comparer</a>
+        <a class="site-nav__link" href="#boutiques">Boutiques</a>
+      </nav>
+
+      </div>
+    </header>
+
+    <main>
+      <body>
+  <div class="container">
+    <!-- Header -->
+    <h1 class="site-title">Chasse Livres</h1>
+    
+    <!-- Filtres -->
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label">Bonnes affaires</span>
+        <span class="filter-link">▼</span>
+      </div>
+      
+      <div class="filter-group">
+        <span class="filter-label">Livres /</span>
+        <a href="#" class="filter-link">naruto</a>
+      </div>
+      
+      <div style="flex:1"></div>
+      
+      <div class="filter-group">
+        <span class="filter-label">Trier par</span>
+        <select class="filter-select">
+          <option>Pertinence</option>
+          <option>Prix croissant</option>
+          <option>Prix décroissant</option>
+          <option>Note</option>
+        </select>
+      </div>
+    </div>
+    
+    <!-- Résultats -->
+    <div class="result-count">4 résultats</div>
+    
+    <!-- Grille produits -->
+    <div class="products-grid">
+      
+      <!-- Produit 1 : Pack Naruto -->
+      <div class="product-card">
+        <h2 class="product-title">Pack tome 1 + tome 2 + tome 3 de Naruto</h2>
+        <div class="product-author">Masashi Kishimoto</div>
+        <div class="product-editor">Kana - 10 avril 2020</div>
+        <span class="product-type">Coffret produits</span>
+        
+        <div class="product-details">
+          <p><strong>EAN :</strong> 3701167163689</p>
+        </div>
+        
+        <div class="product-price">
+          9,00 €
+          <span class="publisher-price">9,00 €</span>
+        </div>
+        
+        <div class="product-rating">
+          <span class="stars">★★★★★</span>
+          <span class="reviews">4 651</span>
+        </div>
+        
+        <a href="#" class="price-link">Voir l'évolution du prix →</a>
+      </div>
+      
+      <!-- Produit 2 : Naruto Tome 6 -->
+      <div class="product-card">
+        <h2 class="product-title">Naruto - Tome 6</h2>
+        <div class="product-author">Masashi Kishimoto</div>
+        <div class="product-editor">Kana - 1er mars 2003</div>
+        <span class="product-type">Broché, 192 pages</span>
+        
+        <div class="product-details">
+          <p><strong>ISBN :</strong> 9782871295112</p>
+        </div>
+        
+        <div class="product-price">
+          7,30 €
+          <span class="publisher-price">7,30 €</span>
+        </div>
+        
+        <div class="product-rating">
+          <span class="stars">★★★★★</span>
+          <span class="reviews">2 907</span>
+        </div>
+        
+        <a href="#" class="price-link">Voir l'évolution du prix →</a>
+      </div>
+      
+      <!-- Produit 3 : Naruto Tome 5 -->
+      <div class="product-card">
+        <h2 class="product-title">Naruto - Tome 5</h2>
+        <div class="product-author">Masashi Kishimoto</div>
+        <div class="product-editor">Kana - 4 novembre 2002</div>
+        <span class="product-type">Broché, 192 pages</span>
+        
+        <div class="product-details">
+          <p><strong>ISBN :</strong> 9782871295105</p>
+        </div>
+        
+        <div class="product-price">
+          7,30 €
+          <span class="publisher-price">7,30 €</span>
+        </div>
+        
+        <div class="product-rating">
+          <span class="stars">★★★★★</span>
+          <span class="reviews">2 845</span>
+        </div>
+        
+        <a href="#" class="price-link">Voir l'évolution du prix →</a>
+      </div>
+      
+      <!-- Produit 4 : Naruto Tome 4 -->
+      <div class="product-card">
+        <h2 class="product-title">Naruto - Tome 4</h2>
+        <div class="product-author">Masashi Kishimoto</div>
+        <div class="product-editor">Kana - 4 novembre 2002</div>
+        <span class="product-type">Broché, 192 pages</span>
+        
+        <div class="product-details">
+          <p><strong>ISBN :</strong> 9782871295099</p>
+        </div>
+        
+        <div class="product-price">
+          7,30 €
+          <span class="publisher-price">7,30 €</span>
+        </div>
+        
+        <div class="product-rating">
+          <span class="stars">★★★★★</span>
+          <span class="reviews">2 732</span>
+        </div>
+        
+        <a href="#" class="price-link">Voir l'évolution du prix →</a>
+      </div>
+      
+    </div>
+  </div>
+
+
+      <section class="section section--alt" id="contact">
+        <div class="container">
+          <h2 class="section__title">Contact</h2>
+          <p class="section__lead">
+              Une idée, une question ou envie de suivre le projet ?
+          </p>
+
+          <div class="contact">
+             <a class="btn btn--primary" href="mailto:ton.email@example.com">Envoyer un email</a>
+            <a class="btn btn--ghost" href="#">Lien / réseau</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__text">
+          © <span id="year">2026</span> — CompareManga 
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+

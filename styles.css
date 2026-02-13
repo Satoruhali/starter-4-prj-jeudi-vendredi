@@ -88,6 +88,7 @@ body {
   grid-template-columns: 1.2fr 1fr;
   gap: 40px;
   align-items: center;
+  padding: 0 1rem;
 }
 
 .kicker {
@@ -404,6 +405,9 @@ body {
   display: none;
 }
 
+.container {
+  padding: 0 1rem; /* ← AJOUTEZ ICI */
+}
 
 
 
@@ -493,5 +497,32 @@ body {
   
   .search-bar__btn {
     width: 100%;
+  }
+  
+  .hero__title {
+    text-align: center;
+  }
+
+  .hero__subtitle {
+    text-align: center;
+  }
+
+  .hero__actions {
+    display: flex;
+    justify-content: center; /* Centre les boutons horizontalement */
+    align-items: center; /* Centre verticalement */
+    gap: 15px; /* Espace entre les boutons */
+    width: 100%; /* Prend toute la largeur */
+    padding: 1rem;
+  }
+
+  .btn {
+    width: 50%; 
+    max-width: 50%; 
+    margin: 0 auto; /* Centre le bouton dans son conteneur */
+    text-align: center; /* Centre le texte */
+    display: flex; /* Flex pour centrer le contenu */
+    justify-content: center; /* Centre le texte horizontalement */
+    align-items: center; /* Centre le texte verticalement */
   }
 }
