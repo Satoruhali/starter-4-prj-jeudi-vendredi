@@ -40,18 +40,36 @@
               Trouvez les meilleures offres auprès de boutiques fiables
             </p>
 
-            <div class="search-bar">
-              <input 
-                type="text" 
-                class="search-bar__input" 
-                placeholder="chercher un manga ou une figurine"
-                aria-label="Rechercher un manga ou une figurine"
-              />
-              <!-- Dans votre index.html - REMPLACER le bouton actuel -->
-            <a href="recherche.html" class="search-bar__btn btn">
+          <div class="search-bar">
+          <input 
+              type="text" 
+              class="search-bar__input" 
+              id="search-input"
+              placeholder="chercher un manga ou une figurine"
+              aria-label="Rechercher un manga ou une figurine"
+          />
+          <button onclick="performSearch()" class="search-bar__btn btn">
               Chercher
-            </a>
-            </div>
+          </button>
+      </div>
+
+            <script>
+              function performSearch() {
+                  const query = document.getElementById('search-input').value.trim();
+                  if (query) {
+                      window.location.href = `recherche.html?q=${encodeURIComponent(query)}`;
+                  } else {
+                      alert('Veuillez entrer un terme de recherche');
+                  }
+              }
+
+              // Permettre la recherche avec la touche Entrée
+              document.getElementById('search-input').addEventListener('keypress', (e) => {
+                  if (e.key === 'Enter') {
+                      performSearch();
+                  }
+              });
+              </script>
 
 
             <div class="hero__actions">
@@ -125,6 +143,27 @@
           </div>
         </div>
       </section>
+
+      <section class="section" id="form">
+        <div class="container">
+          
+        <form class="contact-form" action="https://formsubmit.co/wassim.halitim3@gmail.com" method="post">
+          <label for="full-name">Nom complet</label>
+          <input id="full-name" name="fullName" type="text" required>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5"></textarea>
+          <button type="submit">Envoyer la demande</button>
+          </form>
+
+      </div>
+
+      </section>
+
+      
+
+
 
       <section class="section section--alt" id="contact">
         <div class="container">

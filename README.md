@@ -74,3 +74,44 @@ Le but est de produire une page fonctionnelle, vérifiable localement, et prête
 
 
 
+# Fonctionnalité de Recherche de Manga - CompareManga
+
+Ce document explique le fonctionnement de la recherche de mangas, de la saisie utilisateur à l'affichage des résultats, en passant par la communication avec l'API MangaDex.
+
+## 1. Parcours Utilisateur
+
+1.  **Page d'Accueil (`index.html`) :** L'utilisateur saisit le nom d'un manga (ex: "naruto") dans la barre de recherche.
+2.  **Déclenchement :** Il clique sur le bouton "Chercher" ou appuie sur "Entrée".
+3.  **Redirection :** Le site redirige le navigateur vers la page de résultats (`recherche.html`) en ajoutant la recherche dans l'URL : `recherche.html?q=naruto`.
+4.  **Affichage des Résultats :** La page `recherche.html` lit le terme recherché dans l'URL, interroge l'API MangaDex et affiche les mangas correspondants sous forme de cartes.
+
+## 2. Flux de Données et Composants Techniques
+
+Le schéma ci-dessous illustre le cheminement de la requête :
+
+```mermaid
+flowchart TD
+    A[Utilisateur sur index.html] --> B{Saisie et clic sur "Chercher"};
+    B --> C[Redirection vers recherche.html?q=naruto];
+    
+    subgraph Côté Navigateur (recherche.html)
+        D[JavaScript lit le paramètre 'q' dans l'URL] --> E{Appel à la fonction searchManga};
+        E --> F[Construction de l'URL de l'API];
+        F --> G[Envoi de la requête Fetch au Proxy Local];
+    end
+
+    subgraph Côté Serveur Local (server.js)
+        H[Proxy reçoit la requête sur /api/mangadex/*] --> I[Ajoute les en-têtes CORS];
+        I --> J[Transfère la requête à l'API officielle MangaDex];
+    end
+
+    J --> K[API MangaDex renvoie les données JSON];
+
+    K --> L[Proxy transmet la réponse au navigateur];
+    
+    subgraph Côté Navigateur (recherche.html)
+        M[Réception des données JSON] --> N[Fonction displayResults formate le HTML];
+        N --> O[Affichage des cartes de manga dans la grille];
+    end
+
+    O --> P[L'utilisateur voit les résultats];

@@ -30,139 +30,145 @@
 
     <main>
       <body>
-  <div class="container">
-    <!-- Header -->
-    <h1 class="site-title">Chasse Livres</h1>
-    
-    <!-- Filtres -->
-    <div class="filters">
-      <div class="filter-group">
-        <span class="filter-label">Bonnes affaires</span>
-        <span class="filter-link">▼</span>
-      </div>
-      
-      <div class="filter-group">
-        <span class="filter-label">Livres /</span>
-        <a href="#" class="filter-link">naruto</a>
-      </div>
-      
-      <div style="flex:1"></div>
-      
-      <div class="filter-group">
-        <span class="filter-label">Trier par</span>
-        <select class="filter-select">
-          <option>Pertinence</option>
-          <option>Prix croissant</option>
-          <option>Prix décroissant</option>
-          <option>Note</option>
-        </select>
-      </div>
-    </div>
-    
-    <!-- Résultats -->
-    <div class="result-count">4 résultats</div>
-    
-    <!-- Grille produits -->
-    <div class="products-grid">
-      
-      <!-- Produit 1 : Pack Naruto -->
-      <div class="product-card">
-        <h2 class="product-title">Pack tome 1 + tome 2 + tome 3 de Naruto</h2>
-        <div class="product-author">Masashi Kishimoto</div>
-        <div class="product-editor">Kana - 10 avril 2020</div>
-        <span class="product-type">Coffret produits</span>
-        
-        <div class="product-details">
-          <p><strong>EAN :</strong> 3701167163689</p>
+         <main>
+        <div class="container">
+            <!-- Ajouter un titre dynamique -->
+            <h1 class="site-title" id="search-title">Résultats pour : <span id="search-query"></span></h1>
+            
+            <!-- Filtres existants avec modifications -->
+            <div class="filters">
+                <div class="filter-group">
+                    <span class="filter-label">Trier par</span>
+                    <select class="filter-select" id="sort-order">
+                        <option value="relevance">Pertinence</option>
+                        <option value="title.asc">Titre (A-Z)</option>
+                        <option value="title.desc">Titre (Z-A)</option>
+                        <option value="year.asc">Année (croissant)</option>
+                        <option value="year.desc">Année (décroissant)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Zone de résultats -->
+            <div class="result-count" id="result-count"></div>
+            <div class="products-grid" id="results-grid">
+                <!-- Les résultats seront injectés ici -->
+                <div class="loading">Chargement...</div>
+            </div>
         </div>
+    </main>
+
+    <!-- Footer existant -->
+    <footer class="site-footer">
+        <!-- ... -->
+    <script>
+        // Récupérer le terme de recherche depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('q') || 'naruto'; // Valeur par défaut
         
-        <div class="product-price">
-          9,00 €
-          <span class="publisher-price">9,00 €</span>
-        </div>
+        // Afficher le terme recherché
+        document.getElementById('search-query').textContent = searchQuery;
+        document.title = `Recherche : ${searchQuery} - CompareManga`;
         
-        <div class="product-rating">
-          <span class="stars">★★★★★</span>
-          <span class="reviews">4 651</span>
-        </div>
+        // Fonction pour rechercher des mangas via l'API MangaDex
+        async function searchManga(query, limit = 20, offset = 0, sort = 'relevance') {
+            try {
+               // NOUVELLE ligne (à mettre)
+            const response = await fetch(`/api/mangadex/manga?title=${encodeURIComponent(query)}&limit=${limit}&offset=${offset}&order[${sort}]=desc&includes[]=cover_art`);
+            
+                            
+                if (!response.ok) {
+                    throw new Error(`Erreur API: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Erreur lors de la recherche:', error);
+                return null;
+            }
+        }
+
+
+        // Fonction pour obtenir l'URL de couverture
+        function getCoverUrl(mangaId, fileName) {
+            return `https://uploads.mangadex.org/covers/${mangaId}/${fileName}.512.jpg`;
+        }
         
-        <a href="#" class="price-link">Voir l'évolution du prix →</a>
-      </div>
-      
-      <!-- Produit 2 : Naruto Tome 6 -->
-      <div class="product-card">
-        <h2 class="product-title">Naruto - Tome 6</h2>
-        <div class="product-author">Masashi Kishimoto</div>
-        <div class="product-editor">Kana - 1er mars 2003</div>
-        <span class="product-type">Broché, 192 pages</span>
+        // Fonction pour afficher les résultats
+        function displayResults(data) {
+            const resultsGrid = document.getElementById('results-grid');
+            const resultCount = document.getElementById('result-count');
+            
+            if (!data || !data.data || data.data.length === 0) {
+                resultsGrid.innerHTML = '<div class="no-results">Aucun manga trouvé</div>';
+                resultCount.textContent = '0 résultat';
+                return;
+            }
+            
+            // Afficher le nombre de résultats
+            resultCount.textContent = `${data.data.length} résultat${data.data.length > 1 ? 's' : ''}`;
+            
+            // Générer le HTML pour chaque manga
+            const mangaHTML = data.data.map(manga => {
+                const attributes = manga.attributes;
+                const title = attributes.title?.en || Object.values(attributes.title)[0] || 'Titre inconnu';
+                const description = attributes.description?.en || 'Pas de description disponible';
+                const year = attributes.year || 'N/A';
+                const status = attributes.status || 'inconnu';
+                
+                // Trouver l'image de couverture
+                const coverArt = manga.relationships.find(rel => rel.type === 'cover_art');
+                const coverUrl = coverArt ? 
+                    `https://uploads.mangadex.org/covers/${manga.id}/${coverArt.attributes?.fileName}.512.jpg` : 
+                    'https://via.placeholder.com/350x500?text=Pas+de+couverture';
+                
+                return `
+                    <div class="product-card manga-card">
+                        <div class="manga-cover">
+                            <img src="${coverUrl}" alt="${title}" loading="lazy">
+                        </div>
+                        <h2 class="product-title">${title}</h2>
+                        <div class="product-details">
+                            <p><strong>Année :</strong> ${year}</p>
+                            <p><strong>Statut :</strong> ${status}</p>
+                            <p class="manga-description">${description.substring(0, 150)}${description.length > 150 ? '...' : ''}</p>
+                        </div>
+                        <div class="product-rating">
+                            <span class="stars">${getRatingStars(manga.attributes.rating?.average || 0)}</span>
+                            <span class="reviews">${Math.round(manga.attributes.rating?.bayesian || 0)}</span>
+                        </div>
+                        <a href="manga-details.html?id=${manga.id}" class="price-link">Voir les détails →</a>
+                    </div>
+                `;
+            }).join('');
+            
+            resultsGrid.innerHTML = mangaHTML;
+        }
         
-        <div class="product-details">
-          <p><strong>ISBN :</strong> 9782871295112</p>
-        </div>
+        // Fonction pour générer des étoiles de notation
+        function getRatingStars(rating) {
+            const stars = Math.round(rating / 2); // Convertir sur 5 étoiles
+            return '★'.repeat(stars) + '☆'.repeat(5 - stars);
+        }
         
-        <div class="product-price">
-          7,30 €
-          <span class="publisher-price">7,30 €</span>
-        </div>
+        // Écouter les changements de tri
+        document.getElementById('sort-order').addEventListener('change', (e) => {
+            loadResults(searchQuery, e.target.value);
+        });
         
-        <div class="product-rating">
-          <span class="stars">★★★★★</span>
-          <span class="reviews">2 907</span>
-        </div>
+        // Charger les résultats
+        async function loadResults(query, sort = 'relevance') {
+            const resultsGrid = document.getElementById('results-grid');
+            resultsGrid.innerHTML = '<div class="loading">Chargement...</div>';
+            
+            const data = await searchManga(query, 20, 0, sort);
+            displayResults(data);
+        }
         
-        <a href="#" class="price-link">Voir l'évolution du prix →</a>
-      </div>
-      
-      <!-- Produit 3 : Naruto Tome 5 -->
-      <div class="product-card">
-        <h2 class="product-title">Naruto - Tome 5</h2>
-        <div class="product-author">Masashi Kishimoto</div>
-        <div class="product-editor">Kana - 4 novembre 2002</div>
-        <span class="product-type">Broché, 192 pages</span>
-        
-        <div class="product-details">
-          <p><strong>ISBN :</strong> 9782871295105</p>
-        </div>
-        
-        <div class="product-price">
-          7,30 €
-          <span class="publisher-price">7,30 €</span>
-        </div>
-        
-        <div class="product-rating">
-          <span class="stars">★★★★★</span>
-          <span class="reviews">2 845</span>
-        </div>
-        
-        <a href="#" class="price-link">Voir l'évolution du prix →</a>
-      </div>
-      
-      <!-- Produit 4 : Naruto Tome 4 -->
-      <div class="product-card">
-        <h2 class="product-title">Naruto - Tome 4</h2>
-        <div class="product-author">Masashi Kishimoto</div>
-        <div class="product-editor">Kana - 4 novembre 2002</div>
-        <span class="product-type">Broché, 192 pages</span>
-        
-        <div class="product-details">
-          <p><strong>ISBN :</strong> 9782871295099</p>
-        </div>
-        
-        <div class="product-price">
-          7,30 €
-          <span class="publisher-price">7,30 €</span>
-        </div>
-        
-        <div class="product-rating">
-          <span class="stars">★★★★★</span>
-          <span class="reviews">2 732</span>
-        </div>
-        
-        <a href="#" class="price-link">Voir l'évolution du prix →</a>
-      </div>
-      
-    </div>
-  </div>
+        // Chargement initial
+        loadResults(searchQuery);
+    </script>
 
 
       <section class="section section--alt" id="contact">

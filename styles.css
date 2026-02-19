@@ -75,7 +75,6 @@ body {
 /* Si le logo a une hauteur différente de 32px, ajustez : */
 .brand__logo {
   display: block; /* Évite l'espace sous l'image */
-  vertical-align: middle; /* Aligne avec le texte */
 }
 
 
@@ -357,6 +356,89 @@ body {
 }
 
 
+  /* Section formulaire */
+.section#form {
+  padding: 60px 20px;
+  background: var(--bg);
+}
+
+/* Conteneur */
+.section#form .container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Formulaire */
+.contact-form {
+  background: var(--bg);
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+}
+
+/* Labels */
+.contact-form label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* Inputs et textarea */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Focus */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #ff4d6d;
+  box-shadow: 0 0 0 2px rgba(255, 77, 109, 0.15);
+}
+
+/* Bouton */
+.contact-form button {
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #ff4d6d;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+/* Hover bouton */
+.contact-form button:hover {
+  background: #e63e5c;
+}
+
+/* Petit effet clic */
+.contact-form button:active {
+  transform: translateY(1px);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .contact-form {
+    padding: 20px;
+  }
+}
+
+
+
 /* Styles pour la barre de recherche */
 .search-bar {
   display: flex;
@@ -406,8 +488,58 @@ body {
 }
 
 .container {
-  padding: 0 1rem; /* ← AJOUTEZ ICI */
+  padding: 0 1rem; 
 }
+
+
+ /* Styles additionnels pour les cartes manga */
+        .manga-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .manga-cover {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .manga-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .manga-cover img:hover {
+            transform: scale(1.05);
+        }
+        
+        .manga-description {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        
+        .loading, .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px;
+            color: var(--muted);
+            font-size: 18px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
 
 
 
