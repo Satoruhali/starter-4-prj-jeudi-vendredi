@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="styles.css">
 
 <style>
+/* ===== CONSERVER LES STYLES SPÉCIFIQUES À LA PAGE INSCRIPTION ===== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -15,7 +16,10 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: #e8e1d6;
+  background: 
+    radial-gradient(1000px 600px at 10% 5%, rgba(255, 51, 102, 0.25), transparent 50%),
+    radial-gradient(800px 500px at 90% 15%, rgba(255, 51, 102, 0.15), transparent 50%),
+    var(--bg);
   color: #333;
 }
 
@@ -25,6 +29,7 @@ body {
   max-width: 1100px;
   margin: auto;
   display: flex;
+  
 }
 
 .container .form-info{
@@ -34,8 +39,11 @@ body {
 
 /* header */
 .site-header {
-  background: #e1d8cb;
+  background: 
+  radial-gradient(1000px 600px at 10% 5%, rgba(255, 51, 102, 0.25), transparent 50%),
+  radial-gradient(800px 500px at 90% 15%, rgba(255, 51, 102, 0.15), transparent 50%),;   /* Surchargé par le style global sticky/transparent */
   border-bottom: 1px solid #cfc6b9;
+   ;
 }
 
 .header-flex {
@@ -51,7 +59,6 @@ body {
 
 .site-nav a {
   text-decoration: none;
-  color: #a43c1c;
   font-weight: bold;
 }
 
@@ -63,12 +70,13 @@ body {
 
 .hero-card {
   flex: 2;
-  background: #f5f1ea;
+  background: #141414;
   padding: 25px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  color: white;
 }
 
 .proof-card h3 {
@@ -77,19 +85,20 @@ body {
 
 .proof-card {
   flex: 1;
-  background: #f5f1ea;
+  background: #141414;
   padding: 20px;
   border-radius: 10px;
-   display: flex;
+  display: flex;
   flex-direction: column;
+  color: white;
 }
 
 .proof-card ul {
   display: flex;
-  flex-direction: column; /* obligatoire car tu utilises Flexbox partout */
-  gap: 8px;               /* espace entre les lignes */
+  flex-direction: column;
+  gap: 8px;
   margin-top: 10px;
-  padding-left: 18px;     /* espace pour les puces */
+  padding-left: 18px;
   font-size: 14px;
 }
 
@@ -105,9 +114,10 @@ body {
 
 .card {
   flex: 1;
-  background: #f5f1ea;
+  background: #141414;
   padding: 20px;
   border-radius: 10px;
+  color: white;
 }
 
 /* form section */
@@ -130,15 +140,14 @@ body {
 }
 
 .form-info strong {
-  border-left: 5px solid #a43c1c;
+  border-left: 5px solid #ff4d6d;
   padding-left: 10px;
   display: block;
 }
 
-
 .contact-form {
   flex: 2;
-  background: #f5f1ea;
+  background: #141414;
   padding: 20px;
   border-radius: 10px;
   display: flex;
@@ -158,14 +167,22 @@ body {
   flex-direction: column;
 }
 
-.contact-form label {
-    color: #000;
+.contact-form label, .hint {
+    color: white;
+}
+
+.contact-form span{
+  color: white;
+}
+
+.card p{
+  color: gray;
 }
 
 .contact-form input, .contact-form textarea, select {
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #a43c1c ;
+  border: 1px solid #ff4d6d ;
   
 }
 
@@ -182,7 +199,7 @@ input[type="checkbox"] {
 
 /* button */
  .btn {
-  background: #b34724;
+  
   color: white;
   border: none;
   padding: 12px;
@@ -197,11 +214,25 @@ input[type="checkbox"] {
 width: 40%;
 }
 
-.contact-form button.btn {
-  background: #b34724;
+
+
+input:focus-visible {
+  outline: 3px solid #1a73e8;
+  outline-offset: 2px;
 }
 
+input:invalid {
+  border-color: #c62828;
+}
 
+.error {
+  display: none;
+  color: #c62828;
+}
+
+input:invalid + .hint + .error {
+  display: block;
+}
 
 /* footer */
 .site-footer {
@@ -245,11 +276,7 @@ width: 40%;
   }
 
 }
-
-
 </style>
-
-
 
 </head>
 
@@ -257,13 +284,13 @@ width: 40%;
 
 <header class="site-header">
   <div class="container header-flex">
-    <div class="brand">Flux Local</div>
+    <div class="brand">CompareManga</div>
 
-    <nav class="site-nav">
-      <a href="#">Accueil</a>
-      <a href="#">A propos</a>
-      <a href="#">Participer</a>
-    </nav>
+   <nav class="site-nav" aria-label="Navigation principale">
+        <a class="site-nav__link active" href="#accueil">Accueil</a>
+        <a class="site-nav__link" href="#comparer">Comparer</a>
+        <a class="site-nav__link" href="#boutiques">Boutiques</a>
+      </nav>
   </div>
 </header>
 
@@ -323,11 +350,13 @@ width: 40%;
         <div class="form-group">
           <label for="full-name">Nom complet *</label>
           <input id="full-name" name="fullName" type="text" placeholder="Ex: Samia El Idrissi" required>
+          <p class="hint"> Utlisez votre nom pour faciliter le suivi.</p>
         </div>
 
         <div class="form-group">
           <label for="email">Email *</label>
           <input id="email" name="email" type="email" placeholder="prenom@domaine.fr" required>
+          <p class="hint">Format attendu: nom@domaine.fr</p>
         </div>
       </div>
 
@@ -340,17 +369,19 @@ width: 40%;
             <option>Commerce</option>
             <option>Événement</option>
           </select>
+          <p class="hint">Sélecttionnez l'action principal</p>
         </div>
 
         <div class="form-group">
           <label for="city">Ville *</label>
           <input id="city" name="city" type="text" placeholder="Ex: Bruxelles" required>
+          <p class="hint">Indiquez votre zone locale principal</p>
         </div>
       </div>
 
       <div class="form-group">
         <label for="message">Message</label>
-        <textarea id="message" name="message" rows="4"></textarea>
+        <textarea id="message" name="message" rows="4"  placeholder="Expliquez en 2-3 phrases votre besoin ou proposition" ></textarea>
       </div>
 
       <div class="checkbox">
