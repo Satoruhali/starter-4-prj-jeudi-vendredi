@@ -19,6 +19,44 @@ const questions = [
     choices: ["Dragon Ball", "One Piece", "Attack on Titan"],
     answer: "One Piece" 
 }
+
+{
+    question: "Dans Dragon Ball, quel est le nom du Saiyan qui arrive sur Terre enfant ?",
+    choices: ["Vegeta", "Goku", "Gohan"],
+    answer: "Goku"
+  },
+  {
+    question: "Quel est le nom du héros de Naruto ?",
+    choices: ["Sasuke", "Naruto", "Kakashi"],
+    answer: "Naruto"
+  },
+  {
+    question: "Dans quel manga trouve-t-on des titans mangeurs d'humains ?",
+    choices: ["Attack on Titan", "Tokyo Ghoul", "Demon Slayer"],
+    answer: "Attack on Titan"
+  },
+  {
+    question: "Quel est le nom de l'épée de Roronoa Zoro dans One Piece ?",
+    choices: ["Enma", "Wado Ichimonji", "Shusui"],
+    answer: "Wado Ichimonji"
+  },
+  {
+    question: "Dans Demon Slayer, quel est le nom de la sœur de Tanjiro ?",
+    choices: ["Nezuko", "Shinobu", "Mitsuri"],
+    answer: "Nezuko"
+  },
+  {
+    question: "Quel manga met en scène un lycéen qui combat des Hollows ?",
+    choices: ["Bleach", "Jujutsu Kaisen", "Death Note"],
+    answer: "Bleach"
+  },
+  {
+    question: "Dans Death Note, comment Light Yagami écrit-il les noms de ses victimes ?",
+    choices: ["Dans un carnet", "Sur un ordinateur", "Par téléphone"],
+    answer: "Dans un carnet"
+  }
+
+
 ];
 
 let currentIndex = 0;
