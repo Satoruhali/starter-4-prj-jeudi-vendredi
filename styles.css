@@ -368,44 +368,7 @@ body {
   margin: 0 auto;
 }
 
-/* Formulaire */
-.contact-form {
-  background: var(--bg);
-  padding: 25px 30px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  
-}
 
-/* Labels */
-.contact-form label {
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--text);
-}
-
-/* Inputs et textarea */
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  font-size: 14px;
-  font-family: inherit;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-/* Focus */
-.contact-form input:focus,
-.contact-form textarea:focus {
-  outline: none;
-  border-color: #ff4d6d;
-  box-shadow: 0 0 0 2px rgba(255, 77, 109, 0.15);
-}
 
 /* Bouton */
 .contact-form button {

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini trival pursuit</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+:root {
+  --bg: #0a0a0a;
+  --panel: #141414;
+  --text: #ffffff;
+  --muted: #999999;
+  --brand: #ff3366;
+  --border: rgba(255, 255, 255, 0.15);
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.quiz-card {
+  max-width: 560px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 30px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+h1 {
+  text-align: center;
+  color: var(--text);
+  font-size: 28px;
+  margin: 0 0 20px 0;
+}
+
+#questionText {
+  text-align: center;
+  font-size: 18px;
+  color: var(--text);
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin: 0 0 20px 0;
+}
+
+#answers {
+  margin: 20px 0;
+}
+
+.answer-btn {
+  width: 100%;
+  margin: 8px 0;
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.answer-btn:hover:not(:disabled) {
+  background: var(--brand);
+  border-color: var(--brand);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.answer-btn.good {
+  background: rgba(40, 167, 69, 0.3);
+  border-color: #28a745;
+}
+
+.answer-btn.bad {
+  background: rgba(220, 53, 69, 0.3);
+  border-color: #dc3545;
+}
+
+.answer-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+#scoreText {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--brand);
+  margin: 15px 0 5px;
+}
+
+#feedbackText {
+  text-align: center;
+  min-height: 24px;
+  color: var(--muted);
+  font-style: italic;
+  margin: 10px 0;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+#startBtn, #nextBtn {
+  padding: 14px 30px;
+  border: none;
+  border-radius: 30px;
+  background: var(--brand);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+#startBtn:hover, #nextBtn:hover {
+  background: #ff1a53;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255, 51, 102, 0.3);
+}
+
+#startBtn {
+  background: transparent;
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+#startBtn:hover {
+  background: var(--brand);
+  color: white;
+}
+
+/* 1. ANIMATION D'APPARITION (fade in) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;           /* Départ : invisible */
+    transform: translateY(10px);  /* Départ : 10px plus bas */
+  }
+  to {
+    opacity: 1;           /* Arrivée : visible */
+    transform: translateY(0);      /* Arrivée : position normale */
+  }
+}
+
+/* 2. ANIMATION POUR BONNE RÉPONSE (effet "pop") */
+@keyframes goodAnswer {
+  0% { 
+    transform: scale(1);           /* Départ : taille normale */
+  }
+  50% { 
+    transform: scale(1.05);        /* Milieu : grossit à 105% */
+    background: #4CAF50;            /* Devient vert */
+  }
+  100% { 
+    transform: scale(1);           /* Fin : retour taille normale */
+  }
+}
+
+/* 3. ANIMATION POUR MAUVAISE RÉPONSE (effet "secousse") */
+@keyframes badAnswer {
+  0% { transform: translateX(0); }     /* Départ : position normale */
+  25% { transform: translateX(-5px); } /* Bouge à gauche */
+  50% { transform: translateX(5px); }  /* Bouge à droite */
+  75% { transform: translateX(-5px); } /* Bouge à gauche */
+  100% { transform: translateX(0); }   /* Retour au centre */
+}
+
+/* 4. ANIMATION DE PULSATION (pour bouton Commencer) */
+@keyframes pulse {
+  0% { 
+    transform: scale(1);              /* Taille normale */
+  }
+  50% { 
+    transform: scale(1.05);           /* Grossit à 105% */
+    box-shadow: 0 0 20px var(--brand); /* Ajoute une ombre rose */
+  }
+  100% { 
+    transform: scale(1);              /* Retour taille normale */
+  }
+}
+
+
+/* Tous les boutons de réponse apparaissent avec un fondu */
+.answer-btn {
+  animation: fadeIn 0.3s ease-out;  /* 0.3s = durée, ease-out = démarre vite, finit doux */
+}
+
+/* Effet au survol de la souris */
+.answer-btn:hover {
+  transform: scale(1.02) translateY(-2px);  /* Grossit un peu et monte */
+  transition: all 0.2s ease;                 /* Transition douce sur 0.2s */
+  box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3); /* Ajoute une ombre */
+}
+
+/* Effet quand on clique (actif) */
+.answer-btn:active {
+  transform: scale(0.98);            /* Rétrécit un peu (effet d'enfoncement) */
+  transition: transform 0.1s;        /* Très rapide (0.1s) */
+}
+
+/* Animation spécifique pour une bonne réponse */
+.answer-btn.good {
+  animation: goodAnswer 0.5s ease;   /* Déclenche l'animation goodAnswer */
+}
+
+/* Animation spécifique pour une mauvaise réponse */
+.answer-btn.bad {
+  animation: badAnswer 0.5s ease;    /* Déclenche l'animation badAnswer */
+}
+
+/* Animation du bouton Commencer (pulse en continu) */
+#startBtn {
+  animation: pulse 2s infinite;       /* 2s = durée, infinite = répète à l'infini */
+}
+
+/* Animation pour le texte de la question (changement de question) */
+#questionText {
+  transition: opacity 0.3s ease;     /* Transition douce sur l'opacité */
+}
+
+/* Classe ajoutée en JavaScript pour animer le changement */
+#questionText.changing {
+  opacity: 0;                        /* Devient invisible */
+}
+
+/* Animation pour le score qui augmente */
+#scoreText {
+  transition: color 0.3s ease, transform 0.2s ease; /* Transitions multiples */
+}
+
+/* Classe ajoutée quand le score change */
+#scoreText.score-update {
+  color: var(--brand);                /* Devient rose */
+  transform: scale(1.1);              /* Grossit */
+}
+
+
+
+</style>
+
+</head>
+<body>
+    
+
+<main class="quizz-card " data-student-profile= "edutiant-Wass">
+
+  <h1>Quiz Manga </h1>
+  <p id="questionText">Clique sur Commencer</p>
+
+  <section id="answers">
+    <button class="answer-btn"></button>
+    <button class="answer-btn"></button>
+    <button class="answer-btn"></button>
+  </section>
+
+  <p id="scoreText">Score: 0</p>
+  <p id="feedbackText"></p>
+
+  <div class="actions">
+    <button id="startBtn">Commencer</button>
+    <button id="nextBtn">Question suivante</button>
+  </div>
+  
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
