@@ -18,7 +18,7 @@ const questions = [
     question: "Quel manga parle de pirates ?",
     choices: ["Dragon Ball", "One Piece", "Attack on Titan"],
     answer: "One Piece" 
-}
+},
 
 {
     question: "Dans Dragon Ball, quel est le nom du Saiyan qui arrive sur Terre enfant ?",
